@@ -1,7 +1,8 @@
 FROM seabass_icom 
-COPY server.py /.
+RUN yum install -y expect
+COPY server.py  /.
 COPY monitor.sh /.
-COPY initresp.sh /.
-COPY initsquare.sh /.
-RUN /bin/bash -c "./initsquare.sh"
-CMD ["python","./server.py"]
+COPY initspect  /.
+COPY creds.sh   /.
+COPY dingrod.sh /. 
+ENTRYPOINT ["bash","./dingrod.sh"]

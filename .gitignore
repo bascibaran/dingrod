@@ -1,2 +1,5 @@
+*.swp
+
 *.pyc
+creds.sh
 initresp.sh
