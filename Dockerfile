@@ -1,4 +1,5 @@
 FROM seabass_icom 
+EXPOSE 20500
 RUN yum install -y expect
 COPY server.py  /.
 COPY monitor.sh /.
