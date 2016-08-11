@@ -1,0 +1,6 @@
+{
+	"irods_host": "host",
+	"irods_port": 1247,
+	"irods_zone_name": "zone",
+	"irods_user_name": "dingrod"
+}

@@ -1,9 +1,0 @@
-#!/usr/bin/expect -f
-
-spawn iinit
-
-expect "Enter the host name (DNS) of the server to connect to:" { send "hostname\n" }
-expect "Enter the port number:"                                 { send "portno\n"   } 
-expect "Enter your irods user name:"                            { send "username\n" }
-expect "Enter your irods zone:"                                 { send "zonename\n" }
-expect "Enter your current iRODS password:"                     { send "password\n" }
