@@ -14,7 +14,7 @@ def slistToDict(slist):
     kvpair = slist[i].split('=')
     rdict[kvpair[0]] = kvpair[1]  
   upsplit = slist[4].split()
-  upstr   = upsplit[1] + "," + upsplit[3]
+  upstr   = upsplit[1] + ":" + upsplit[3]
   rdict['uptime'] =  upstr
   return rdict
  
