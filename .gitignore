@@ -1,3 +1,6 @@
+.vagrant/
+Vagrantfile
+hosts
 *.json
 *.swp
 
