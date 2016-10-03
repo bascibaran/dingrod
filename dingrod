@@ -1,5 +1,5 @@
 #!/bin/bash
-#
+# sysvinit service script template from int64ago/myservice.sh on github gist
 # myservice         Start up myservice
 #
 # chkconfig: 2345 55 25
