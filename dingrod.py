@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import sys
 import datetime   as dt
 import dingpoker  as dp
 from BaseHTTPServer import BaseHTTPRequestHandler,HTTPServer
@@ -37,4 +38,6 @@ def serve():
     server.handle_request()
 
 if __name__ == "__main__":
+  if (len(sys.argv) > 0):
+    PORT_NUMBER = sys.argv[1];
   serve()
