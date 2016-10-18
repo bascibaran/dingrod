@@ -1,3 +1,4 @@
+logs/
 .vagrant/
 Vagrantfile
 hosts
