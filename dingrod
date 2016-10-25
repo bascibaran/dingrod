@@ -1,42 +1,80 @@
 #!/bin/bash
-#
-# /etc/init.d/dingrod
-#
-# chkconfig: 2345 95 05
-# description: dingrod service daemon
-#
-# processname: dingrod
+# SysV service script for dingrod taken from CyVerse python daemonizing template. 
+# Fill in the variables below and add to chkconfig.
 
-start()
+# user who runs the daemon
+DAEMONUSER="dingrod"
+# Daemon description
+DESC="dingrod irods monitoring service"
+# Executable file
+NAME=dingrod.py
+# Path to executable file
+DAEMON=/var/lib/dingrod/$NAME
+# Arguments
+DAEMON_ARGS="--options args"
+PIDFILE=/var/run/$NAME.pid
+PIDFILE_2=/var/run/$NAME-2.pid
+# Script name for init.d
+SCRIPTNAME=/etc/init.d/dingrod
+DAEMON_NAME=$NAME
+
+# Exit if the package is not installed
+[ -x "$DAEMON" ] || exit 0
+
+
+# Load the VERBOSE setting and other rcS variables
+. /lib/init/vars.sh
+
+# Define LSB log_* functions.
+# Depend on lsb-base (>= 3.2-14) to ensure that this file is present
+# and status_of_proc is working.
+. /lib/lsb/init-functions
+
+#
+# Function that starts the daemon/service
+#
+do_start()
 {
+	log_daemon_msg "Starting system $DAEMON_NAME daemon"
+	start-stop-daemon --start --background --pidfile $PIDFILE --make-pidfile  --startas $DAEMON
+	typeset -i var=$(cat $PIDFILE)
+	num=$(($var + 2))
+	echo $num > $PIDFILE_2 
+	log_end_msg $?
 }
 
-stop()
+#
+# Function that stops the daemon/service
+#
+do_stop()
 {
+	log_daemon_msg "Stopping system $DAEMON_NAME daemon"
+	start-stop-daemon --stop --pidfile $PIDFILE --retry 10
+	start-stop-daemon --stop --pidfile $PIDFILE_2 --retry 10
+	log_end_msg $?
+
+	rm -f $PIDFILE
+	rm -f $PIDFILE_2
 }
-
-
-
 
 case "$1" in
-  start)
-    start
-    ;;
-  stop)
-    stop
-    ;;
-  restart)
-    stop
-    start
-    ;;
-  status)
-    status $prog
-    RETVAL=$?
-    ;;
-  *)
-    echo $"USAGE: $0 {start|stop|restart|status}"
-    RETVAL=1
+ 
+    start|stop)
+        do_${1}
+        ;;
+ 
+    restart|reload|force-reload)
+        do_stop
+        do_start
+        ;;
+ 
+    status)
+        status_of_proc "$DAEMON_NAME" "$DAEMON" && exit 0 || exit $?
+        ;;
+    *)
+        echo "Usage: /etc/init.d/$DAEMON_NAME {start|stop|restart|status}"
+        exit 1
+        ;;
+ 
 esac
-exit $RETVAL
-
-
+exit 0
