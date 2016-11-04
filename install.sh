@@ -10,7 +10,7 @@ echo  "> creating dingrod system user\n"
 adduser --system --home /var/lib/dingrod dingrod
 
 echo  "> moving payload to habitat\n"
-cp dingrod.py   .
+cp dingrod.py   /var/lib/dingrod/. 
 cp dingpoker.py /var/lib/dingrod/.
 
 if [[ -e irods_environment.json ]]
