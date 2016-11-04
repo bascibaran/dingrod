@@ -1,7 +1,9 @@
 #!/bin/bash
 # SysV service script for dingrod taken from CyVerse python daemonizing template. 
 # Fill in the variables below and add to chkconfig.
-
+# /etc/init.d/dingrod
+#
+# chkconfig: 35 95 05
 # user who runs the daemon
 DAEMONUSER="dingrod"
 # Daemon description
@@ -20,7 +22,6 @@ DAEMON_NAME=$NAME
 
 # Exit if the package is not installed
 [ -x "$DAEMON" ] || exit 0
-
 
 # Load the VERBOSE setting and other rcS variables
 . /lib/init/vars.sh

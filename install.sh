@@ -20,7 +20,7 @@ then
   cp irods_environment.json /var/lib/dingrod/.irods/.
 else
   echo "> irods_environment.json does not exist!\nUse the template!\n"
-  exit(1)
+  exit 1
 fi
 
 echo "> changing ownership of dingrod materials to the system user.\n"
