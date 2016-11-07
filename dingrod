@@ -30,22 +30,22 @@ DAEMON_NAME=$NAME
 # Depend on lsb-base (>= 3.2-14) to ensure that this file is present
 # and status_of_proc is working.
 #. /lib/lsb/init-functions
-
+. /etc/init.d/functions
 #
 # Function that starts the daemon/service
 #
 do_start()
 {
-  if [$UID -ne 0] ; then
+  if [ $UID -ne 0 ] ; then
     echo "no privilege"
     exit 4
   fi
   [ -x $DAEMON ] || exit 5
   echo -n $"Starting $NAME: "
-  daemon $DAEMON_NAME $DAEMON_ARGS # might be a better way to start dingrod and capture the return value? or logging? what are lockfiles aaaaaaaaa
+  daemon $DAEMON $DAEMON_ARGS # might be a better way to start dingrod and capture the return value? or logging? what are lockfiles aaaaaaaaa
   retval=$?
   echo
-  [ $retval -eq 0] && touch $lockfile
+  [ $retval -eq 0 ] && touch $lockfile
 
 }
 
