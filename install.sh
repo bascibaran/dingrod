@@ -5,7 +5,6 @@ echo "+++++++++++++++++++++\n+INSTALLING DINGROD!+\n+++++++++++++++++++++\n"
 
 echo  "> creating dingrod habitat @ /var/lib/dingrod\n" 
 mkdir /var/lib/dingrod
-chmod 777 /var/lib/dingrod
 echo  "> creating dingrod system user\n"
 adduser --system --home /var/lib/dingrod dingrod
 chown  -R dingrod /var/lib/dingrod 
