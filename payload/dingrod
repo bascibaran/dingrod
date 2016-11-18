@@ -42,10 +42,11 @@ do_start()
   fi
   [ -x $DAEMON ] || exit 5
   echo -n $"Starting $NAME: "
-  su - dingrod $DAEMON $DAEMON_ARGS # might be a better way to start dingrod and capture the return value? or logging? what are lockfiles aaaaaaaaa
+  . /var/lib/dingrod/.bashrc
+  daemon --user dingrod nohup $DAEMON $DAEMON_ARGS >/dev/null 2>&1 &
   retval=$?
   echo
-  [ $retval -eq 0 ] && touch $lockfile
+  [ $retval -eq 0 ] 
 
 }
 

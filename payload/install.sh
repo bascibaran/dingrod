@@ -36,6 +36,5 @@ echo "> installing iCommands in dingrod user space.\n"
 mv irods-icommands-4.1.9-centos-6.installer /var/lib/dingrod/icommands
 su - dingrod << 'EOF'
 yes "" | sh icommands 
-. ~/.bashrc
 exit
 
