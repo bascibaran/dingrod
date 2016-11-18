@@ -39,4 +39,4 @@ su - dingrod << 'EOF'
 yes "" | sh icommands 
 . ~/.bashrc
 exit
-'EOF'
+
