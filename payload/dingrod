@@ -43,7 +43,7 @@ do_start()
   [ -x $DAEMON ] || exit 5
   echo -n $"Starting $NAME: "
   . /var/lib/dingrod/.bashrc
-  daemon --user dingrod nohup $DAEMON $DAEMON_ARGS >/dev/null 2>&1 &
+  daemon --user dingrod nohup $DAEMON $DAEMON_ARGS >/dev/null 2>&1  &
   retval=$?
   echo
   [ $retval -eq 0 ] 
