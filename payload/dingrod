@@ -61,21 +61,9 @@ do_stop()
   fi
   echo -n $"Stopping $NAME"
   perl /var/lib/dingrod/dingstop.pl
-
-#  if [ $UID -ne 0 ] ; then
-#    echo "no privilege"
-#    exit 4
-#  fi
-#  echo -n $"Stopping $NAME"
-#    if [ -n "$PIDFILE" ]; then
-#      echo $PIDFILE | xargs kill
-#      retval=3
-#    else
-#      failure $"Stopping $NAME"
-#    fi
-#    retval=$?
-#    echo
-#    [ $retval -eq 0 ]
+  retval=$?
+  echo
+  [ $retval -eq 0 ]
 }
 
 case "$1" in
@@ -90,8 +78,7 @@ case "$1" in
         ;;
  
     status)
-        status_of_proc "$DAEMON_NAME" "$DAEMON" && exit 0 || exit $?
-        ;;
+        # TODO: report status of service
     *)
         echo "Usage: /etc/init.d/$DAEMON_NAME {start|stop|restart|status}"
         exit 1
