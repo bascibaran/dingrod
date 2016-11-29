@@ -60,15 +60,22 @@ do_stop()
     exit 4
   fi
   echo -n $"Stopping $NAME"
-    if [ -n "$PIDFILE" ]; then
-      echo $PIDFILE | xargs kill
-      retval=3
-    else
-      failure $"Stopping $NAME"
-    fi
-    retval=$?
-    echo
-    [ $retval -eq 0 ]
+  perl /var/lib/dingrod/dingstop.pl
+
+#  if [ $UID -ne 0 ] ; then
+#    echo "no privilege"
+#    exit 4
+#  fi
+#  echo -n $"Stopping $NAME"
+#    if [ -n "$PIDFILE" ]; then
+#      echo $PIDFILE | xargs kill
+#      retval=3
+#    else
+#      failure $"Stopping $NAME"
+#    fi
+#    retval=$?
+#    echo
+#    [ $retval -eq 0 ]
 }
 
 case "$1" in
