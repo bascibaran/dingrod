@@ -78,7 +78,14 @@ case "$1" in
         ;;
  
     status)
-        # TODO: report status of service
+        dingprocs=$(ps -ef | grep "[d]ingrod" | wc -l )
+        if [ $dingprocs -le 4  ] ; then
+          echo "DINGROD STATUS: INACTIVE"
+        else
+          echo "DINGROD STATUS: ACTIVE"
+        fi
+        exit 0;
+        ;;
     *)
         echo "Usage: /etc/init.d/$DAEMON_NAME {start|stop|restart|status}"
         exit 1
