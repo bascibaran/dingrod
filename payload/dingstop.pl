@@ -10,7 +10,6 @@ my @lines = split "\n", $raw;
 foreach my $line (@lines)
 {
   my @words = split " ", $line;
-  print $words[1];
   if ($words[0] eq "dingrod")
   { system("kill",$words[1]);}
 }
