@@ -14,8 +14,6 @@ NAME=dingrod.py
 DAEMON=/var/lib/dingrod/$NAME
 # Arguments
 DAEMON_ARGS="8080"
-PIDFILE=/var/run/$NAME.pid
-PIDFILE_2=/var/run/$NAME-2.pid
 # Script name for init.d
 SCRIPTNAME=/etc/init.d/dingrod
 DAEMON_NAME=$NAME
@@ -43,7 +41,7 @@ do_start()
   [ -x $DAEMON ] || exit 5
   echo -n $"Starting $NAME: "
   . /var/lib/dingrod/.bashrc
-  daemon --user dingrod nohup $DAEMON $DAEMON_ARGS >/dev/null 2>&1  &
+  daemon --user $DAEMONUSER setsid $DAEMON $DAEMON_ARGS '>/dev/null 2>&1 </dev/null  &'
   retval=$?
   echo
   [ $retval -eq 0 ] 
@@ -78,8 +76,8 @@ case "$1" in
         ;;
  
     status)
-        dingprocs=$(ps -ef | grep "[d]ingrod" | wc -l )
-        if [ $dingprocs -le 4  ] ; then
+        dingprocs=$(ps -ef | grep "[/]var/lib/dingrod/dingrod.py" | wc -l )
+        if [ $dingprocs -eq 0  ] ; then
           echo "DINGROD STATUS: INACTIVE"
         else
           echo "DINGROD STATUS: ACTIVE"
