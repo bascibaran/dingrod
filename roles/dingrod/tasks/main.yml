@@ -1,0 +1,4 @@
+---
+
+- name: run dingrod install script
+  command:  install.sh

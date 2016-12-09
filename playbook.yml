@@ -1,0 +1,4 @@
+---
+ - hosts: dingrod
+   roles:
+     - dingrod
