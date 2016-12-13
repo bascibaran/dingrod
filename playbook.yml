@@ -2,3 +2,5 @@
  - hosts: dingrod
    roles:
      - dingrod
+   remote_user: root
+

@@ -1,5 +1,5 @@
 #!/bin/bash
-
+echo $(pwd)
 # this script installs dingrod. 
 echo -e "+++++++++++++++++++++\n+INSTALLING DINGROD!+\n+++++++++++++++++++++\n"
 
