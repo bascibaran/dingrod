@@ -1,31 +1,49 @@
 ---
 
+- name: install libselinux-python
+  yum:
+    name: libselinux-python
+    state: latest
+
 - name: creating dingrod habitat @ /var/lib/dingrod
   command: mkdir /var/lib/dingrod
+
 - name: creating dingrod system user
   command: adduser --system --home /var/lib/dingrod dingrod
+
 - name: changing ownership of /var/lib/dingrod to system user dingrod
   command: chown -R dingrod /var/lib/dingrod
+
 - name: transferring dingrod.py to target machine
   copy:
     src: dingrod.py
     dest: /var/lib/dingrod/dingrod.py
+
 - name: transferring dingpoker.py to target machine
   copy:
     src: dingpoker.py
     dest: /var/lib/dingrod/dingpoker.py
+
 - name: transferring dingstop.pl to target machine
   copy:
     src: dingstop.pl
     dest: /var/lib/dingrod/dingstop.pl
+
 - name: creating .irods directory for dingrod. 
   command: mkdir /var/lib/dingrod/.irods
+
 - name: transferring irods_environment.json
   copy:
     src: irods_environment.json
     dest: /var/lib/dingrod/.irods/irods_environment.json
+
+
 - name: changing ownership of dingrod materials to dingrod system user. 
-  command: chown dingrod /var/lib/dingrod/*
+  shell: ls /var/lib/dingrod/*
+  register: names
+
+- command: chown dingrod {{ item }}
+  with_items: names.stdout_lines
 
 - name: placing service script in /etc/init.d
   copy:
