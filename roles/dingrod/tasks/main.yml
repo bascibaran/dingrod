@@ -38,12 +38,6 @@
     dest: /var/lib/dingrod/.irods/irods_environment.json
     mode: 444
 
-- name: changing ownership of dingrod materials to dingrod system user. 
-  shell: ls /var/lib/dingrod/*
-  register: names
-
-- command: chown dingrod {{ item }}
-  with_items: names.stdout_lines
 
 - name: placing service script in /etc/init.d
   template:
