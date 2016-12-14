@@ -1,6 +1,10 @@
 ---
  - hosts: dingrod
    roles:
-     - dingrod
+     - role: dingrod
+       dingrod_irods_host: localhost 
+       dingrod_irods_zone: tempZone
+       dingrod_irods_port: 1247
+       dingrod_port: 8080
    remote_user: root
 

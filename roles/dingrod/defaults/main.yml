@@ -1,2 +1,6 @@
 ---
 # defaults file for dingrod
+dingrod_irods_host: localhost
+dingrod_irods_port: 1247
+dingrod_irods_zone: tempZone
+dingrod_port: 8080

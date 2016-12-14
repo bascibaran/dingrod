@@ -33,10 +33,10 @@
   command: mkdir /var/lib/dingrod/.irods
 
 - name: transferring irods_environment.json
-  copy:
-    src: irods_environment.json
+  template:
+    src: irods_environment.json.j2
     dest: /var/lib/dingrod/.irods/irods_environment.json
-
+    mode: 444
 
 - name: changing ownership of dingrod materials to dingrod system user. 
   shell: ls /var/lib/dingrod/*
@@ -46,9 +46,10 @@
   with_items: names.stdout_lines
 
 - name: placing service script in /etc/init.d
-  copy:
-    src: dingrod
+  template:
+    src: dingrod.j2
     dest: /etc/init.d/dingrod
+    mode: 440
 - name: dingrod chkconfig
   command: chkconfig --add dingrod
 
