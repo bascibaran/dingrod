@@ -7,15 +7,11 @@ The actual probing mechanisms live in dingpoker.py so it is pretty straightforwa
 
 
 ### INSTALL
-Get the payload directory. 
-
-The payload directory contains all the files necessary to install/run dingrod. However, you must first edit the irods_environment.json.template to create an irods_environment.json file that points to your iRODS installation. 
+Dingrod is packaged as an ansible role. An example playbook using this role is present in this repo, named `playbook.yml`
+As you can see in the example playbook, you need root access to your target machine to install dingrod. 
+If you don't want to use ansible, you can just grab the contents of the `roles/dingrod/files` directory onto your target machine and  just run the `install.sh` script. 
+ However, you must first edit the `roles/dingrod/files/irods_environment.json.template` to create an `irods_environment.json` file that points to your iRODS installation. 
 Do not change the iRODS user in the environment JSON, as we want dingrod's actions to be associated w/ the dingrod system user. 
-
-So , once you have your environment JSON all set up, run the script, install.sh. 
-this installs the service, and the iCommands that the service uses to probe your iRODS installation. 
-
-You must now source your .bashrc file! This is easily done with the command `. ~/.bashrc`
 
 ### RUN
 dingrod is administrated by `service dingrod`. 
