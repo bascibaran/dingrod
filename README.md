@@ -21,6 +21,6 @@ dingrod is administrated by `service dingrod`.
 
 once dingrod is running, you can now ping it using http GET requests! 
 curl -X GET dingrodhost:8080
-8080 is the default dingrod port, but you can change it easily enough by modifying $DAEMONARGS in `payload/dingrod`
+8080 is the default dingrod port, but you can change it easily enough by modifying $DAEMONARGS in `roles/dingrod/files/dingrod`
 
 Happy dinging!
