@@ -6,44 +6,58 @@
     state: latest
 
 - name: creating dingrod habitat @ /var/lib/dingrod
-  command: mkdir /var/lib/dingrod
+  file: 
+    path: /var/lib/dingrod
+    state: directory
 
 - name: creating dingrod system user
   command: adduser --system --home /var/lib/dingrod dingrod
 
 - name: changing ownership of /var/lib/dingrod to system user dingrod
-  command: chown -R dingrod /var/lib/dingrod
+  file: 
+    path: /var/lib/dingrod
+    owner: dingrod
 
 - name: transferring dingrod.py to target machine
   copy:
     src: dingrod.py
     dest: /var/lib/dingrod/dingrod.py
+    owner: dingrod
+    mode: "u+x"
 
 - name: transferring dingpoker.py to target machine
   copy:
     src: dingpoker.py
     dest: /var/lib/dingrod/dingpoker.py
+    owner: dingrod
+    mode: "u+x"
 
 - name: transferring dingstop.pl to target machine
   copy:
     src: dingstop.pl
     dest: /var/lib/dingrod/dingstop.pl
+    owner: dingrod
+    mode: "u+x"
 
 - name: creating .irods directory for dingrod. 
-  command: mkdir /var/lib/dingrod/.irods
+  file: 
+    path: /var/lib/dingrod/.irods
+    state: directory
+    owner: dingrod
 
 - name: transferring irods_environment.json
   template:
     src: irods_environment.json.j2
     dest: /var/lib/dingrod/.irods/irods_environment.json
-    mode: 444
-
+    owner: dingrod
 
 - name: placing service script in /etc/init.d
   template:
     src: dingrod.j2
     dest: /etc/init.d/dingrod
-    mode: 440
+    owner: root
+    mode: "u+rwx"
+
 - name: dingrod chkconfig
   command: chkconfig --add dingrod
 
