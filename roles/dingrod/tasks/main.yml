@@ -1,10 +1,5 @@
 ---
 
-- name: install libselinux-python
-  yum:
-    name: libselinux-python
-    state: latest
-
 - name: creating dingrod habitat @ /var/lib/dingrod
   file: 
     path: /var/lib/dingrod
@@ -57,9 +52,6 @@
     dest: /etc/init.d/dingrod
     owner: root
     mode: "u+rwx"
-
-- name: dingrod chkconfig
-  command: chkconfig --add dingrod
 
 - name: transferring icommands to dingrod userspace
   copy:
