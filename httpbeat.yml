@@ -7,7 +7,7 @@ httpbeat:
     -
       cron: "@every 5s"
 
-      url: http://ender.iplantcollaborative.org:20500
+      url: <dingrod host here>
 
       method: get
 
