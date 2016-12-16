@@ -57,9 +57,3 @@
     owner: root
     mode: "u+rwx"
 
-- name: transferring icommands to dingrod userspace
-  copy:
-    src: irods-icommands-4.1.9-centos-6.installer
-    dest: /var/lib/dingrod/icommands
-- name: installing icommands to dingrod userspace
-  script: icinstall.sh

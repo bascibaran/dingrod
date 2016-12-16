@@ -40,7 +40,6 @@ do_start()
   fi
   [ -x $DAEMON ] || exit 5
   echo -n $"Starting $NAME: "
-  . /var/lib/dingrod/.bashrc
   daemon --user $DAEMONUSER setsid $DAEMON $DAEMON_ARGS '>/dev/null 2>&1 </dev/null  &'
   retval=$?
   echo
