@@ -22,8 +22,8 @@ def slistToDict(slist):
 
 def poke():
   try:
-    sp.check_call(["/var/lib/dingrod/icommands/imiscsvrinfo"])
-    return parse(os.popen("/var/lib/dingrod/icommands/imiscsvrinfo").read())
+    sp.check_call(["imiscsvrinfo"])
+    return parse(os.popen("imiscsvrinfo").read())
   except sp.CalledProcessError:
     return None
 

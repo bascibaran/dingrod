@@ -1,4 +1,8 @@
 ---
+- name: make sure libselinux-python is installed
+  yum: 
+    name: libselinux-python
+    state: latest
 
 - name: creating dingrod habitat @ /var/lib/dingrod
   file: 
