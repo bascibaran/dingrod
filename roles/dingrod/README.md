@@ -1,31 +1,40 @@
 Role Name
 ========
 
-A brief description of the role goes here.
+This role installs the dingrod service to the target system. The dingrod service aids in monitoring an iRODS setup by providing an endpoint that can be pinged through an http GET request. 
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Currently , the dingrod role only supports CentOS 6 systems. When you run this role, it runs under the assumption that it's setting dingrod up on a cent 6 box. 
+
 
 Role Variables
---------------
+------------
+the role variables you can set are:
+dingrod_irods_host: the host where the iRODS system to monitor lives. (default = localhost) 
+dingrod_irods_port: the port of your target iRODS system (default = 1247 )
+dingrod_irods_zone: the iRODS zone that dingrod is to monitor (default = tempZone)
+dingrod_port: NOT TO BE CONFUSED WITH dingrod_irods_port! the port on which dingrod listens for http GET requests. (default = 8080)
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+This role depends on the CyVerse-Ansible.irods-icommands role from Ansible Galaxy. 
 
 Example Playbook
 -------------------------
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: servers
+    - hosts: dingrod
       roles:
-         - { role: username.rolename, x: 42 }
+         - role: dingrod
+	   dingrod_irods_host: irods.yourirods.org
+	   dingrod_irods_port: 1247
+	   dingrod_irods_zone: tempZone
+	   dingrod_poert: 8080
 
 License
 -------
@@ -34,5 +43,5 @@ BSD
 
 Author Information
 ------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Baran Balkan (bascibaran)
+github.com/bascibaran
