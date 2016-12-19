@@ -1,5 +1,6 @@
 dingrod
 ========
+[![Build Status](https://travis-ci.org/bascibaran/dingrod.svg?branch=master)](https://travis-ci.org/bascibaran/dingrod)
 
 This role installs the dingrod service to the target system. The dingrod service aids in monitoring an iRODS setup by providing an endpoint that can be pinged through an http GET request. 
 This service is intended to make it easier to monitor iRODS using pingdom. 
