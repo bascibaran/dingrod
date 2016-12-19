@@ -1,4 +1,4 @@
-Role Name
+dingrod
 ========
 
 This role installs the dingrod service to the target system. The dingrod service aids in monitoring an iRODS setup by providing an endpoint that can be pinged through an http GET request. 
