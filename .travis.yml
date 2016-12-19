@@ -7,10 +7,10 @@ services:
 
 before_install:
 - docker pull centos:6
-- docker run -dt --name dingdock --expose 8080  centos6
+- docker run -dt --name dingdock --expose 8080  centos:6
    
 install:
 - pip install ansible
 
 script:
-- ansible-playbook -i test/inventory tests/test.yml --syntax-check
+- ansible-playbook -i test/inventory tests/main.yml 
