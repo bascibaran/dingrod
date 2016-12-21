@@ -13,4 +13,5 @@
   hosts: docker_containers
   roles:
     - { role: dingrod, dingrod_irods_host: data.iplantcollaborative.org, dingrod_irods_zone: iplant} 
-    
+- name: read the hosts. 
+  command: cat /etc/hosts  
