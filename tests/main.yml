@@ -1,2 +1,16 @@
 ---
-- name: 
+- name: Bring up cent6 docker container
+  hosts: localhost
+  gather_facts: false
+  vars:
+    inventory:
+      - name: dinghost
+        image: "chrismeyers/centos6"
+  roles:
+    - { role: provision_docker, provision_docker_inventory: "{{inventory}}" }
+    
+ - name: Hello World
+   hosts: docker_containers
+   tasks:
+     - debug: msg="Hello World"
+    
