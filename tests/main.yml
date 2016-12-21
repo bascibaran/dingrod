@@ -9,8 +9,8 @@
   roles:
     - { role: chrismeyersfsu.provision_docker, provision_docker_privileged: true,  provision_docker_inventory: "{{inventory}}", provision_docker_use_docker_connection: true }
     
-- name: Hello World
+- name: install dingrod!
   hosts: docker_containers
-  tasks:
-    - debug: msg="Hello World"
+  roles:
+    - { role: dingrod, dingrod_irods_host: data.iplantcollaborative.org, dingrod_irods_zone: iplant} 
     
