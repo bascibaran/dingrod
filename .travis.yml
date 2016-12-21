@@ -27,5 +27,5 @@ install:
 - sudo ansible-galaxy install chrismeyersfsu.provision_docker 
 
 script:
-- ansible -m ping -i tests/inventory
+- ansible -m ping all -i tests/inventory
 - ansible-playbook -i tests/inventory tests/main.yml 
