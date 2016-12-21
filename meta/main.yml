@@ -14,4 +14,5 @@ galaxy_info:
   - system
   - web
 dependencies:
-  - CyVerse-Ansible.irods-icommands 
+  - CyVerse-Ansible.irods-icommands
+  - chrismeyersfsu.provision_docker 
