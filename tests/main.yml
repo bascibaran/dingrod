@@ -26,9 +26,7 @@
       command: echo $DAEMON_ARGS
       register: dingport
     - name: assert correct expansion
-      assert:
-        that:
-          - "dingport.stdout == 8080"
+      debug: msg="{{dingport.stdout}}"
 
     - name: Verify irods_environment.json exists
       stat:
