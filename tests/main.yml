@@ -7,7 +7,7 @@
       - name: dinghost
         image: "chrismeyers/centos6"
   roles:
-    - { role: provision_docker, provision_docker_privileged: true,  provision_docker_inventory: "{{inventory}}", provision_docker_use_docker_connection: true }
+    - { role: provision_docker, provision_docker_inventory: "{{inventory}}" }
     
 - name: test dingrod!
   hosts: docker_containers
