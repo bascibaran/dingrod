@@ -36,4 +36,4 @@
     - name: Test template expansion irods_environment.json
       command: echo BLOORG
     - name: start dingrod
-      command: sudo service dingrod start 
+      command: sudo /etc/init.d/dingrod start 
