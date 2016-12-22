@@ -21,11 +21,21 @@
       failed_when: not response.stat.exists
 
     - name: Test template expansion dingrod
-      shell: cat /etc/init.d/dingrod | grep '^DAEMON_ARGS'
+      shell: cat /etc/init.d/dingrod | grep '^DAEMON_ARGS' > dingarg ; export $(cat dingarg)
+    - name: test expansion dingrod part 2
+      command: echo $DAEMON_ARGS
+      register: dingport
+    - name: assert correct expansion
+      assert:
+        that:
+          - "dingport.stdout == 8080"
 
     - name: Verify irods_environment.json exists
       stat:
         path: /var/lib/dingrod/.irods/irods_environment.json
       register: response
       failed_when: not response.stat.exists  
-  
+    - name: Test template expansion irods_environment.json
+      command: echo BLOORG
+    - name: start dingrod
+      command: sudo service dingrod start 
