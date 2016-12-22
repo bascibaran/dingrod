@@ -18,7 +18,7 @@
       stat:
         path: /etc/init.d/dingrod
       register: response
-      failed_when: not_response.stat.exists
+      failed_when: not response.stat.exists
 
     - name: Test template expansion dingrod
       shell: cat /etc/init.d/dingrod | grep '^DAEMON_ARGS'
@@ -27,5 +27,5 @@
       stat:
         path: /var/lib/dingrod/.irods/irods_environment.json
       register: response
-      failed_when: not_response.stat.exists  
+      failed_when: not response.stat.exists  
   
