@@ -2,19 +2,20 @@
 - name: Bring up cent6 docker container
   hosts: localhost
   gather_facts: false
-  vars_files:
-    - ../defaults/main.yml
   vars:
     inventory:
       - name: dinghost
         image: "chrismeyers/centos6"
-    irods_environment: "{{
-      lookup('template', '../templates/irods_environment.json.j2') }}"
   roles:
     - { role: provision_docker, provision_docker_inventory: "{{inventory}}" }
     
 - name: test dingrod!
   hosts: docker_containers
+  vars_files:
+    - ../defaults/main.yml
+  vars:
+    irods_environment: "{{
+      lookup('template', '../templates/irods_environment.json.j2') }}"
   roles:
     - { role: dingrod, dingrod_irods_host: data.iplantcollaborative.org, dingrod_irods_zone: iplant} 
   tasks:
