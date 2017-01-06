@@ -10,7 +10,7 @@
     - { role: provision_docker, provision_docker_inventory: "{{inventory}}" }
     
 - name: test dingrod!
-  hosts: docker_containers
+  hosts: dinghost
   vars_files:
     - ../defaults/main.yml
   vars:
@@ -45,4 +45,4 @@
           - irods_environment.irods_port      == dingrod_irods_port
           - irods_environment.irods_zone_name == dingrod_irods_zone
     - name: start dingrod
-      command: docker exec dinghost sudo service dingrod start 
+      command: sudo service dingrod start 
