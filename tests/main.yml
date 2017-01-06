@@ -44,11 +44,5 @@
           - irods_environment.irods_host      == dingrod_irods_host
           - irods_environment.irods_port      == dingrod_irods_port
           - irods_environment.irods_zone_name == dingrod_irods_zone
-    - name: let's see the name of our provisioned container
-      shell: docker ps
-      register: dpsout
-    - name: print it!
-      debug:
-        var: dpsout
-      #- name: start dingrod
-      #command: sudo service dingrod start 
+    - name: start dingrod
+      command: docker exec dinghost sudo service dingrod start 
