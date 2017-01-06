@@ -4,6 +4,10 @@
     name: libselinux-python
     state: latest
 
+- name: install python irods client
+  pip:
+    name: git+git://github.com/irods/python-irodsclient.git
+
 - name: creating dingrod habitat @ /var/lib/dingrod
   file: 
     path: /var/lib/dingrod

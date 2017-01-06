@@ -2,10 +2,14 @@
 - name: Bring up cent6 docker container
   hosts: localhost
   gather_facts: false
+  vars_files:
+    - ../defaults/main.yml
   vars:
     inventory:
       - name: dinghost
         image: "chrismeyers/centos6"
+    irods_environment: "{{
+      lookup('template', '../templates/irods_environment.json.j2') }}"
   roles:
     - { role: provision_docker, provision_docker_inventory: "{{inventory}}" }
     
@@ -33,7 +37,17 @@
         path: /var/lib/dingrod/.irods/irods_environment.json
       register: response
       failed_when: not response.stat.exists  
-    - name: Test template expansion irods_environment.json
-      command: echo BLOORG
-    - name: start dingrod
-      command: sudo /etc/init.d/dingrod start 
+    - name: verify irods environment template expands correctly
+      assert:
+        that:
+          - irods_environment.irods_host      == dingrod_irods_host
+          - irods_environment.irods_port      == dingrod_irods_port
+          - irods_environment.irods_zone_name == dingrod_irods_zone
+    - name: let's see the name of our provisioned container
+      shell: docker ps
+      register: dpsout
+    - name: print it!
+      debug:
+        var: dpsout
+      #- name: start dingrod
+      #command: sudo service dingrod start 
