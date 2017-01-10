@@ -4,7 +4,7 @@
   gather_facts: false
   vars:
     inventory:
-      - name: dinghost
+      - name: docker_containers
         image: "chrismeyers/centos6"
   roles:
     - { role: provision_docker, provision_docker_inventory: "{{inventory}}" }
@@ -17,7 +17,7 @@
         dest: /home/seabass
 
 - name: test dingrod!
-  hosts: dinghost
+  hosts: docker_containers
   vars_files:
     - ../defaults/main.yml
   vars:
