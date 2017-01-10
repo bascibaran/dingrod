@@ -8,7 +8,14 @@
         image: "chrismeyers/centos6"
   roles:
     - { role: provision_docker, provision_docker_inventory: "{{inventory}}" }
-    
+
+- name: set up seabass test environment
+  tasks:
+    - name: getting seabass from github
+      git:
+        repo: https://github.com/bascibaran/seabass.git
+        dest: /home/seabass
+
 - name: test dingrod!
   hosts: dinghost
   vars_files:
