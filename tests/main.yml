@@ -55,10 +55,11 @@
       service:
         name: dingrod
         state: started 
+
 - name: test dingrod ( pinging)
   hosts: docker_containers
   tasks:
     - name: send get request
       get_url: 
-      url: localhost:8080
-      dest:/home/ding.test
+        url: localhost:8080
+        dest: /home/ding.test
