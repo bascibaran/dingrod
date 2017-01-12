@@ -56,11 +56,3 @@
         name: dingrod
         state: started 
 
-- name: test dingrod ( pinging)
-  hosts: docker_containers
-  tasks:
-    - name: send get request
-      command: curl -X GET localhost:8080 
-      register: ding
-    - name: let's see what our ding gets
-      debug: msg="{{ding.stdout}}"
