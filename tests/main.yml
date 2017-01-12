@@ -60,6 +60,7 @@
   hosts: docker_containers
   tasks:
     - name: send get request
-      get_url: 
-        url: localhost:8080
-        dest: /home/ding.test
+      command: curl -X GET localhost:8080 
+      register: ding
+    - name: let's see what our ding gets
+      debug: msg="{{ding.stdout}}"
