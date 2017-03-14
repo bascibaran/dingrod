@@ -1,31 +1,35 @@
+"""
+dingpoker.py
+pokes the irods set up and parses the info into a json reply.
+"""
 import json
-import os
-import subprocess as sp
+import time
+import socket
+from irods.miscsvrinfo import iMiscSvrInfo
+def parse(info):
+    '''
+    The results of the imiscsvrinfo query are encoded
+    as attributes of an object.
+    Here we parse those attributes into a dict
+    which is then parsed into a json object to for dingrod to send back.
+    '''
+    mdict = {
+        'serverType' : info.serverType,
+        'relVersion' : info.relVersion,
+        'apiVersion' : info.apiVersion,
+        'rodsZone'   : info.rodsZone,
+        'uptime'     : int(info.serverBootTime - int(time.time()))
+        }
+    return  json.JSONEncoder().encode(mdict)
 
-def parse(resp):
-  slist = resp.split('\n')
-  sdict = slistToDict(slist)
-  return  json.JSONEncoder().encode(sdict)
-  
-
-def slistToDict(slist):
-  rdict = {}
-  for i in range(1,4):
-    kvpair = slist[i].split('=')
-    rdict[kvpair[0]] = kvpair[1]  
-  upsplit = slist[4].split()
-  upstr   = upsplit[1] + ":" + upsplit[3]
-  rdict['uptime'] =  upstr
-  return rdict
- 
-  
-
-def poke():
-  try:
-    sp.check_call(["imiscsvrinfo"])
-    return parse(os.popen("imiscsvrinfo").read())
-  except sp.CalledProcessError:
-    return None
-
-
-  
+def poke(host, port):
+    '''
+    this function executes the actual poke,
+    obtaining an iMiscSvrInfo object from the python irods client.
+    We parse the object into a json message for dingrod to return
+    '''
+    try:
+        info = iMiscSvrInfo(host, port)
+        return parse(info)
+    except socket.error:
+        return None
