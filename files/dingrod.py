@@ -31,11 +31,6 @@ class pingHandler(BaseHTTPRequestHandler):
     #return 503
       self.send_response(503)
     return
-  def do_POST(self):
-    '''
-    TODO? POST requests for getting information that requires more involved user authentication...
-    '''
-    return
 
 def serve():
   server = HTTPServer(('',PORT_NUMBER), pingHandler)

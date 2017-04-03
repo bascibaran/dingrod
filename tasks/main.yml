@@ -5,9 +5,11 @@
     state: latest
 
   #- name: install python irods client
-  #pip:
-  #  name: git+git://github.com/irods/python-irodsclient.git
-
+  #  git:
+  #    repo: git+git://github.com/bascibaran/python-irodsclient.git
+  #    dest: /var/lib/pyclient
+  #
+  #- name: update $PYTHONPATH
 - name: creating dingrod habitat @ /var/lib/dingrod
   file: 
     path: /var/lib/dingrod
