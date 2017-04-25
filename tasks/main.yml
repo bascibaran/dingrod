@@ -1,15 +1,36 @@
 ---
+- name: downloading epel repo
+  get_url: url=http://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm dest=/tmp/epel-release-latest-6.noarch.rpm
+
+- name: installing epel repo
+  command: rpm -ivh /tmp/epel-release-latest-6.noarch.rpm creates=/etc/yum.repos.d/epel.repo
 - name: make sure libselinux-python is installed
   yum: 
     name: libselinux-python
     state: latest
+- name: and also pip....
+  package:
+    name: python-pip
+    state: present
+- name: python27  installing scl 
+  package:
+    name: centos-release-SCL
+    state: latest
+- name: python27 installing python27
+  package:
+    name: python27
+    state: latest
+- name: make sure we have git...
+  package:
+    name: git
+    state: latest
+- name: installing python package six
+  pip:
+    name: six
+- name: installing python irodsclient
+  pip:
+    name: git+https://github.com/bascibaran/python-irodsclient.git#egg=python-irodsclient
 
-  #- name: install python irods client
-  #  git:
-  #    repo: git+git://github.com/bascibaran/python-irodsclient.git
-  #    dest: /var/lib/pyclient
-  #
-  #- name: update $PYTHONPATH
 - name: creating dingrod habitat @ /var/lib/dingrod
   file: 
     path: /var/lib/dingrod
