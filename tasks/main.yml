@@ -37,7 +37,10 @@
     state: directory
 
 - name: creating dingrod system user
-  command: adduser --system --home /var/lib/dingrod dingrod
+  user:
+    name: dingrod
+    system: yes
+    home: /var/lib/dingrod
 
 - name: changing ownership of /var/lib/dingrod to system user dingrod
   file: 

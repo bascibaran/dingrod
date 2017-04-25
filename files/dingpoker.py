@@ -31,5 +31,5 @@ def poke(host, port):
     try:
         info = iMiscSvrInfo(host, port)
         return parse(info)
-    except socket.error:
+    except:
         return None

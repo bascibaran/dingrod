@@ -3,9 +3,12 @@ import sys
 import datetime   as dt
 import dingpoker  as dp
 from BaseHTTPServer import BaseHTTPRequestHandler,HTTPServer
+import json
 
 PORT_NUMBER = 20500
 
+HOST = 'localhost'
+PORT = '1247'
 
 class pingHandler(BaseHTTPRequestHandler):
   lastping  = None
@@ -14,13 +17,13 @@ class pingHandler(BaseHTTPRequestHandler):
   def do_GET(self):
     if self.lastping is None:
       self.lastping = dt.datetime.now()
-      self.ding = dp.poke()
+      self.ding = dp.poke(HOST,PORT)
     else:
       tnow = dt.datetime.now()
       tdelt = tnow - lastping
       if tdelt.total_seconds > 1:
         self.lastping = tnow
-        self.ding = dp.poke()
+        self.ding = dp.poke(HOST,PORT)
     if self.ding is not None:
     #return 200 and json object stored as string in ding
       self.send_response(200)
@@ -38,6 +41,10 @@ def serve():
     server.handle_request()
 
 if __name__ == "__main__":
+  with open('.irods/irods_environment.json') as json_data:
+    d = json.load(json_data)
+    HOST = d['irods_host']
+    PORT = d['irods_port']
   if (len(sys.argv) > 1):
     PORT_NUMBER = int(sys.argv[1]);
   serve()
