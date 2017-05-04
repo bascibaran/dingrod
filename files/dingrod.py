@@ -41,10 +41,11 @@ def serve():
     server.handle_request()
 
 if __name__ == "__main__":
-  with open('.irods/irods_environment.json') as json_data:
+  if (len(sys.argv) > 2):
+    PORT_NUMBER = int(sys.argv[1]);
+    IRODS_ENV   = sys.argv[2];
+  with open(IRODS_ENV) as json_data:
     d = json.load(json_data)
     HOST = d['irods_host']
     PORT = d['irods_port']
-  if (len(sys.argv) > 1):
-    PORT_NUMBER = int(sys.argv[1]);
   serve()

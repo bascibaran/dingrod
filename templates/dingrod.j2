@@ -11,9 +11,11 @@ DESC="dingrod irods monitoring service"
 # Executable file
 NAME=dingrod.py
 # Path to executable file
-DAEMON=/var/lib/dingrod/$NAME
+DINGHOME=/var/lib/dingrod
+DAEMON="$DINGHOME/$NAME"
+IRODS_ENV="$DINGHOME/.irods/irods_environment.json"
 # Arguments
-DAEMON_ARGS="{{dingrod_port}}"
+DAEMON_ARGS="{{dingrod_port}} $IRODS_ENV"
 # Script name for init.d
 SCRIPTNAME=/etc/init.d/dingrod
 DAEMON_NAME=$NAME

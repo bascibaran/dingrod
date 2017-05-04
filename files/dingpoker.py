@@ -18,7 +18,7 @@ def parse(info):
         'relVersion' : info.relVersion,
         'apiVersion' : info.apiVersion,
         'rodsZone'   : info.rodsZone,
-        'uptime'     : int(info.serverBootTime - int(time.time()))
+        'uptime'     : int( int(time.time()) - info.serverBootTime )
         }
     return  json.JSONEncoder().encode(mdict)
 
