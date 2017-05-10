@@ -15,7 +15,8 @@ DINGHOME=/var/lib/dingrod
 DAEMON="$DINGHOME/$NAME"
 IRODS_ENV="$DINGHOME/.irods/irods_environment.json"
 # Arguments
-DAEMON_ARGS="{{dingrod_port}} $IRODS_ENV"
+DINGPORT={{dingrod_port}}
+DAEMON_ARGS="$DINGPORT $IRODS_ENV"
 # Script name for init.d
 SCRIPTNAME=/etc/init.d/dingrod
 DAEMON_NAME=$NAME

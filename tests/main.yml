@@ -33,9 +33,9 @@
       failed_when: not response.stat.exists
 
     - name: Test template expansion dingrod
-      shell: cat /etc/init.d/dingrod | grep '^DAEMON_ARGS' > dingarg ; export $(cat dingarg)
+      shell: cat /etc/init.d/dingrod | grep '^DINGPORT' > dingarg ; export $(cat dingarg)
     - name: test expansion dingrod part 2
-      command: echo $DAEMON_ARGS
+      command: echo $DINGPORT
       register: dingport
     - name: assert correct expansion
       debug: msg="{{dingport.stdout}}"
